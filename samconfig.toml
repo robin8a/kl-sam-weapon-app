@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "kl-sam-sam-weapon-app"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-17wqdnkp2580z"
+s3_prefix = "kl-sam-sam-weapon-app"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"

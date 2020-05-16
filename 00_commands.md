@@ -1,5 +1,5 @@
-# SAM
-## Init
+
+# Init
 
 ```sh
 sam init --runtime ruby2.5 --name kl-sam-weapon-app
@@ -33,147 +33,97 @@ git remote add origin https://github.com/robin8a/kl-sam-weapon-app.git
 git push -u origin master
 ```
 
-
-# Build
-```sh
-# tell the command where your source code is if you get that error
-sam build --base-dir hello_world
-```
-
-# package your application and deploy it to S3 using the package command:
-
-```sh
-sam package \
-    --output-template-file packaged.yaml \
-    --s3-bucket kl-sam-weapon-app-bucket
-
-```
-
-# Finally, run the deploy command:
-
-```sh
-sam deploy \
-    --template-file packaged.yaml \
-    --stack-name hello-world-app \
-    --capabilities CAPABILITY_IAM \
-    --region us-east-1
-```
-
-
-
-
-
-
-
-
-
-
-
-# Docker
-
-```sh
-docker run -v "$PWD":/var/task -it lambci/lambda:build-ruby2.5 /bin/bash \
--c "yum -y install mysql-devel ; bundle install --deployment ; bash"
-
-Unable to find image 'lambci/lambda:build-ruby2.5' locally
-build-ruby2.5: Pulling from lambci/lambda
-a981bd693b45: Pull complete 
-e2c11048af11: Pull complete 
-0d9e356eba6a: Pull complete 
-e25d09fd7c43: Pull complete 
-Digest: sha256:25727c7b02478da32f5d104c00f7a8f3bb8084de37758a6372eee77e92e4d0b0
-Status: Downloaded newer image for lambci/lambda:build-ruby2.5
-Loaded plugins: ovl, priorities
-amzn-main                                                                                                                               | 2.1 kB  00:00:00     
-amzn-updates                                                                                                                            | 2.5 kB  00:00:00     
-(1/5): amzn-main/latest/group_gz                                                                                                        | 4.4 kB  00:00:00     
-(2/5): amzn-updates/latest/group_gz                                                                                                     | 4.4 kB  00:00:00     
-(3/5): amzn-updates/latest/primary_db                                                                                                   | 3.1 MB  00:00:02     
-(4/5): amzn-updates/latest/updateinfo                                                                                                   | 645 kB  00:00:06     
-(5/5): amzn-main/latest/primary_db                                                                                                      | 4.0 MB  00:00:10     
-Resolving Dependencies
---> Running transaction check
----> Package mysql-devel.noarch 0:5.5-1.6.amzn1 will be installed
---> Processing Dependency: mysql55-devel >= 5.5 for package: mysql-devel-5.5-1.6.amzn1.noarch
---> Processing Dependency: /usr/bin/mysql_config for package: mysql-devel-5.5-1.6.amzn1.noarch
---> Running transaction check
----> Package mysql55.x86_64 0:5.5.62-1.23.amzn1 will be installed
---> Processing Dependency: real-mysql55-libs(x86-64) = 5.5.62-1.23.amzn1 for package: mysql55-5.5.62-1.23.amzn1.x86_64
---> Processing Dependency: mysql-config for package: mysql55-5.5.62-1.23.amzn1.x86_64
----> Package mysql55-devel.x86_64 0:5.5.62-1.23.amzn1 will be installed
---> Running transaction check
----> Package mysql-config.x86_64 0:5.5.62-1.23.amzn1 will be installed
----> Package mysql55-libs.x86_64 0:5.5.62-1.23.amzn1 will be installed
---> Finished Dependency Resolution
-
-Dependencies Resolved
-
-===============================================================================================================================================================
- Package                                Arch                            Version                                    Repository                             Size
-===============================================================================================================================================================
-Installing:
- mysql-devel                            noarch                          5.5-1.6.amzn1                              amzn-main                             2.7 k
-Installing for dependencies:
- mysql-config                           x86_64                          5.5.62-1.23.amzn1                          amzn-updates                           49 k
- mysql55                                x86_64                          5.5.62-1.23.amzn1                          amzn-updates                          7.5 M
- mysql55-devel                          x86_64                          5.5.62-1.23.amzn1                          amzn-updates                          201 k
- mysql55-libs                           x86_64                          5.5.62-1.23.amzn1                          amzn-updates                          816 k
-
-Transaction Summary
-===============================================================================================================================================================
-Install  1 Package (+4 Dependent packages)
-
-Total download size: 8.5 M
-Installed size: 32 M
-Downloading packages:
-(1/5): mysql-devel-5.5-1.6.amzn1.noarch.rpm                                                                                             | 2.7 kB  00:00:00     
-(2/5): mysql-config-5.5.62-1.23.amzn1.x86_64.rpm                                                                                        |  49 kB  00:00:00     
-(3/5): mysql55-devel-5.5.62-1.23.amzn1.x86_64.rpm                                                                                       | 201 kB  00:00:01     
-(4/5): mysql55-libs-5.5.62-1.23.amzn1.x86_64.rpm                                                                                        | 816 kB  00:00:03     
-(5/5): mysql55-5.5.62-1.23.amzn1.x86_64.rpm                                                                                             | 7.5 MB  00:00:05     
----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Total                                                                                                                          1.4 MB/s | 8.5 MB  00:00:06     
-Running transaction check
-Running transaction test
-Transaction test succeeded
-Running transaction
-  Installing : mysql55-libs-5.5.62-1.23.amzn1.x86_64                                                                                                       1/5 
-  Installing : mysql-config-5.5.62-1.23.amzn1.x86_64                                                                                                       2/5 
-  Installing : mysql55-5.5.62-1.23.amzn1.x86_64                                                                                                            3/5 
-  Installing : mysql55-devel-5.5.62-1.23.amzn1.x86_64                                                                                                      4/5 
-  Installing : mysql-devel-5.5-1.6.amzn1.noarch                                                                                                            5/5 
-  Verifying  : mysql-config-5.5.62-1.23.amzn1.x86_64                                                                                                       1/5 
-  Verifying  : mysql55-5.5.62-1.23.amzn1.x86_64                                                                                                            2/5 
-  Verifying  : mysql55-devel-5.5.62-1.23.amzn1.x86_64                                                                                                      3/5 
-  Verifying  : mysql55-libs-5.5.62-1.23.amzn1.x86_64                                                                                                       4/5 
-  Verifying  : mysql-devel-5.5-1.6.amzn1.noarch                                                                                                            5/5 
-
-Installed:
-  mysql-devel.noarch 0:5.5-1.6.amzn1                                                                                                                           
-
-Dependency Installed:
-  mysql-config.x86_64 0:5.5.62-1.23.amzn1 mysql55.x86_64 0:5.5.62-1.23.amzn1 mysql55-devel.x86_64 0:5.5.62-1.23.amzn1 mysql55-libs.x86_64 0:5.5.62-1.23.amzn1
-
-Complete!
-[DEPRECATED] The `--deployment` flag is deprecated because it relies on being remembered across bundler invocations, which bundler will no longer do in future versions. Instead please use `bundle config set deployment 'true'`, and stop using this flag
-Don't run Bundler as root. Bundler can ask for sudo if it is needed, and installing your bundle as root will break this application for all non-root users on
-this machine.
-```
-
-## So there we go. We need the file: libmysqlclient.so.18. How do we find it?
-```sh
-/sbin/ldconfig -p | grep mysql | cut -d\> -f2
-
-/usr/lib64/mysql/libmysqlclient.so.18
-
-mkdir lib
-cp /usr/lib64/mysql/libmysqlclient.so.18 lib/
-
-```
-
+# SAM
 ## Build
+```sh
+sam build
+
+### Result
+sam build
+Building resource 'HelloWorldFunction'
+Running RubyBundlerBuilder:CopySource
+Running RubyBundlerBuilder:RubyBundle
+Running RubyBundlerBuilder:RubyBundleDeployment
+
+Build Succeeded
+
+Built Artifacts  : .aws-sam/build
+Built Template   : .aws-sam/build/template.yaml
+
+Commands you can use next
+=========================
+[*] Invoke Function: sam local invoke
+[*] Deploy: sam deploy --guided
+```
+
+## Deploy
 
 ```sh
-sam build --base-dir hello_world
+sam deploy --guided
 
+### result
+sam deploy --guided
+
+Configuring SAM deploy
+======================
+
+        Looking for samconfig.toml :  Not found
+
+        Setting default arguments for 'sam deploy'
+        =========================================
+        Stack Name [sam-app]: kl-sam-sam-weapon-app     
+        AWS Region [us-east-1]: 
+        #Shows you resources changes to be deployed and require a 'Y' to initiate deploy
+        Confirm changes before deploy [y/N]: Y
+        #SAM needs permission to be able to create roles to connect to the resources in your template
+        Allow SAM CLI IAM role creation [Y/n]: Y
+        HelloWorldFunction may not have authorization defined, Is this okay? [y/N]: y
+        Save arguments to samconfig.toml [Y/n]: Y
+
+        Looking for resources needed for deployment: Not found.
+        Creating the required resources...
+        Successfully created!
+
+                Managed S3 bucket: aws-sam-cli-managed-default-samclisourcebucket-17wqdnkp2580z
+                A different default S3 bucket can be set in samconfig.toml
+
+        Saved arguments to config file
+        Running 'sam deploy' for future deployments will use the parameters saved above.
+        The above parameters can be changed by modifying samconfig.toml
+        Learn more about samconfig.toml syntax at 
+        https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html
+
+        Deploying with following values
+        ===============================
+        Stack name                 : kl-sam-sam-weapon-app
+        Region                     : us-east-1
+        Confirm changeset          : True
+        Deployment s3 bucket       : aws-sam-cli-managed-default-samclisourcebucket-17wqdnkp2580z
+        Capabilities               : ["CAPABILITY_IAM"]
+        Parameter overrides        : {}
+
+Initiating deployment
+=====================
+Uploading to kl-sam-sam-weapon-app/9f36d2f0295199bf0fd7bbc24027c493  546858 / 546858.0  (100.00%)
+HelloWorldFunction may not have authorization defined.
+Uploading to kl-sam-sam-weapon-app/48575a48b14bbf08af6ce27543857eac.template  1122 / 1122.0  (100.00%)
+
+Waiting for changeset to be created..
+
+CloudFormation stack changeset
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Operation                                                   LogicalResourceId                                           ResourceType                                              
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
++ Add                                                       HelloWorldFunctionHelloWorldPermissionProd                  AWS::Lambda::Permission                                   
++ Add                                                       HelloWorldFunctionRole                                      AWS::IAM::Role                                            
++ Add                                                       HelloWorldFunction                                          AWS::Lambda::Function                                     
++ Add                                                       ServerlessRestApiDeployment47fc2d5f9d                       AWS::ApiGateway::Deployment                               
++ Add                                                       ServerlessRestApiProdStage                                  AWS::ApiGateway::Stage                                    
++ Add                                                       ServerlessRestApi                                           AWS::ApiGateway::RestApi                                  
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Changeset created successfully. arn:aws:cloudformation:us-east-1:369939105943:changeSet/samcli-deploy1589577720/94b774a5-30d2-4e38-9faf-48238b915dc7
+
+
+Previewing CloudFormation changeset before deployment
 ```
